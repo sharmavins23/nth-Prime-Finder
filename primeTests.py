@@ -71,9 +71,9 @@ def main():
     plt.xlabel("Algorithm")
     plt.ylabel("Time (s)")
 
-    # Add the times to the bars
+    # Add the times to the bars with 3 decimal places
     for i in range(len(names)):
-        plt.text(x=i, y=times[i], s=times[i], ha="center")
+        plt.text(names[i], times[i], f"{times[i]:.3f}")
 
     plt.savefig("primeTests.png")
 
