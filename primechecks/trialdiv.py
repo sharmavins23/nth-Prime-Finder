@@ -1,5 +1,5 @@
 import math
-# Naive, but with isPrime check up to roots of n
+# Trial division only up to sqrt(n)
 
 
 def nthPrime(n):

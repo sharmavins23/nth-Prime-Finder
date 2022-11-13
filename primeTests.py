@@ -2,7 +2,7 @@ import timeit
 import matplotlib.pyplot as plt
 
 from primechecks.naive import nthPrime as naiventhPrime
-from primechecks.logcheck import nthPrime as logchecknthPrime
+from primechecks.trialdiv import nthPrime as trialdivnthPrime
 from primechecks.eratosthenes import nthPrime as eratosthenesnthPrime
 # Tests various kinds of prime numbers and records their times
 
@@ -14,8 +14,8 @@ def packageFunctions():
             "nthPrime": naiventhPrime
         },
         {
-            "name": "Log Check",
-            "nthPrime": logchecknthPrime
+            "name": "Trial Division",
+            "nthPrime": trialdivnthPrime
         },
         {
             "name": "Sieve of Eratosthenes",
