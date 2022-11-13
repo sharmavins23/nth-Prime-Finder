@@ -1,39 +1,60 @@
 import timeit
 import matplotlib.pyplot as plt
 
-from primechecks.naive import isPrime as naiveIsPrime
-from primechecks.logcheck import isPrime as logcheckIsPrime
+from primechecks.naive import nthPrime as naiventhPrime
+from primechecks.logcheck import nthPrime as logchecknthPrime
+from primechecks.eratosthenes import nthPrime as eratosthenesnthPrime
 # Tests various kinds of prime numbers and records their times
 
 
 def packageFunctions():
     return [
         {
-            "name": "naive",
-            "isPrime": naiveIsPrime
+            "name": "Naive",
+            "nthPrime": naiventhPrime
         },
         {
-            "name": "logcheck",
-            "isPrime": logcheckIsPrime
+            "name": "Log Check",
+            "nthPrime": logchecknthPrime
+        },
+        {
+            "name": "Sieve of Eratosthenes",
+            "nthPrime": eratosthenesnthPrime
         }
     ]
 
 
-def testFunc(isPrime):
-    for i in range(1, 1_000):
-        isPrime(i)
+def testFunc(nthPrime):
+    for i in range(1, 100):
+        nthPrime(i)
+
+
+def verifyFuncs(primeFuncs):
+    for primeFunc in primeFuncs:
+        name = primeFunc["name"]
+        nthPrime = primeFunc["nthPrime"]
+
+        # Generate a list of primes
+        primes = [nthPrime(i) for i in range(1, 10)]
+
+        assert(primes == [2, 3, 5, 7, 11, 13, 17, 19, 23]
+               ), f"[{name}] Primes are not correct: {primes}"
+
+    print("All functions verified correct (for 10 primes).")
 
 
 def main():
     primeFuncs = packageFunctions()
 
+    verifyFuncs(primeFuncs)
+
     for primeFunc in primeFuncs:
         name = primeFunc["name"]
-        isPrime = primeFunc["isPrime"]
+        nthPrime = primeFunc["nthPrime"]
         print(f"Testing {name}...")
 
         primeFunc["time"] = timeit.timeit(
-            lambda: testFunc(isPrime), number=1_000)
+            lambda: testFunc(nthPrime), number=1_000)
 
     # Export times to CSV
     with open("primeTests.csv", "w") as f:
