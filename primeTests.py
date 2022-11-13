@@ -70,6 +70,11 @@ def main():
     plt.title("Prime Number Check Times")
     plt.xlabel("Algorithm")
     plt.ylabel("Time (s)")
+
+    # Add the times to the bars
+    for i in range(len(names)):
+        plt.text(x=i, y=times[i], s=times[i], ha="center")
+
     plt.savefig("primeTests.png")
 
 
